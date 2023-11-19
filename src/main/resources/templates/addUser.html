@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+<h1>Add User</h1>
+
+<form th:action="@{addUser}" th:object="${user}" th:method="POST">
+    <label for="firstName">Firstname</label>
+    <input type="text" th:text="${user.getFirstName()}" id="firstName"/>
+    <br>
+    <label for="lastName">Lastname</label>
+    <input type="text" th:text="${user.getLastName()}" id="lastName"/>
+    <br>
+    <label for="email">Email</label>
+    <input type="text" th:text="${user.getEmail()}" id="email"/>
+    <br>
+    <label for="login">Username</label>
+    <input type="text" th:text="${user.getUsername()}" id="login" required/>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" th:text="${user.getPassword()}" id="password" required/>
+    <br>
+    <label>Roles:
+        <input type="checkbox" name="roles"
+               th:each="role : ${allRoles}"
+               th:text="${role.getAuthority()}"
+               th:value="${role.getId()}"
+               th:field="*{roles}"
+        />
+    </label>
+    <br>
+    <input type="submit" value="Confirm"/>
+</form>
+<br>
+<a th:href="@{users}">Users page</a>
+<br>
+<a th:href="@{http://localhost:8080/logout}">Logout</a>
+</body>
+</html>

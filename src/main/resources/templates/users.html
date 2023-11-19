@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+<h1>Users list</h1>
+<div>
+    <table th:border="1">
+        <tr>
+            <th>id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Roles</th>
+            <th>Manipulations</th>
+        </tr>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getFirstName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getPassword()}"></td>
+            <td th:text="${user.getAuthorities()}"></td>
+            <td>
+                <a th:href="@{'editUser?id=' + ${user.getId()}}">Edit</a>
+                <a th:href="@{'deleteUser?id=' + ${user.getId()}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br>
+<a th:href="@{addUser}">Add user</a>
+<br>
+<a th:href="@{http://localhost:8080/admin}">Admin page</a>
+<br>
+<a th:href="@{http://localhost:8080/logout}">Logout</a>
+
+</body>
+</html>
