@@ -9,21 +9,21 @@
 <body>
 <h1>Edit user</h1>
 <br>
-<form th:action="@{editUser}" th:object="${user}" th:method="POST">
-    <label for="firstname">Firstname</label>
-    <input type="text" th:text="${user.getFirstName()}" id="firstname"/>
+<form th:action="@{'?id='+${user.getId()}}" th:object="${user}" th:method="POST">
+    <label for="firstName">Firstname</label>
+    <input type="text" th:field="*{firstName}" id="firstName"/>
     <br>
-    <label for="lastname">Lastname</label>
-    <input type="text" th:text="${user.getLastName()}" id="lastname"/>
+    <label for="lastName">Lastname</label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
     <br>
     <label for="email">Email</label>
-    <input type="text" th:text="${user.getEmail()}" id="email"/>
+    <input type="text" th:field="*{email}" id="email"/>
     <br>
     <label for="username">Username</label>
-    <input type="text" th:text="${user.getUsername()}" id="username"/>
+    <input type="text" th:field="*{username}" id="username" required/>
     <br>
     <label for="password">Password</label>
-    <input type="password" th:text="${user.getPassword()}" id="password"/>
+    <input type="password" th:field="*{password}" id="password" required/>
     <br>
     <label>Roles:
         <input type="checkbox" name="roles"
@@ -37,6 +37,6 @@
 </form>
 <a th:href="@{users}">Users page</a>
 <br>
-<a th:href="@{http://localhost:8080/logout}">Logout</a>
+<a th:href="@{logout}">Logout</a>
 </body>
 </html>
