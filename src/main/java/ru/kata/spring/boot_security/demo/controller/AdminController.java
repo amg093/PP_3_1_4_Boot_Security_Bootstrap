@@ -61,17 +61,13 @@ public class AdminController {
 
     @GetMapping(value = "/editUser")
     public String showEditUserPage(@RequestParam("id") long id, Model model) {
-        System.out.println("get /editUser");
-        User userFromDb = userService.getUser(id);
-        System.out.println("Edit user /get " + userFromDb);
-        model.addAttribute("user", userFromDb);
+        model.addAttribute("user", userService.getUser(id));
         model.addAttribute("allRoles", roleService.getAllRoles());
         return "editUser";
     }
 
     @PostMapping(value = "/editUser")
     public String editUser(@RequestParam("id") long id, @ModelAttribute("user") User user) {
-        System.out.println("Edit user /post " + user);
         user.setId(id);
         userService.saveOrUpdate(user);
         return REDIRECT_USERS;

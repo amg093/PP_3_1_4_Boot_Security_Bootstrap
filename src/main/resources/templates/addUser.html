@@ -10,20 +10,21 @@
 <h1>Add User</h1>
 
 <form th:action="@{addUser}" th:object="${user}" th:method="POST">
-    <label for="firstName">Firstname</label>
-    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <label for="firstName"></label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="firstname"/>
     <br>
-    <label for="lastName">Lastname</label>
-    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <label for="lastName"></label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastname"/>
     <br>
-    <label for="email">Email</label>
-    <input type="text" th:field="*{email}" id="email"/>
+    <label for="email"></label>
+    <input type="text" th:field="*{email}" id="email" placeholder="email"/>
     <br>
-    <label for="username">Username</label>
-    <input type="text" th:field="*{username}" id="username"/>
+    <label for="username"></label>
+    <input type="text" th:field="*{username}" id="username" required placeholder="username"/>
     <br>
-    <label for="password">Password</label>
-    <input type="password" th:field="*{password}" id="password"/>
+    <label for="password"></label>
+    <input type="password" th:field="*{password}" id="password" required placeholder="password"/>
+    <span class="toggle-password fa fa-fw fa-eye field-icon"></span>
     <br>
     <label>Roles:
         <input type="checkbox" name="roles"
