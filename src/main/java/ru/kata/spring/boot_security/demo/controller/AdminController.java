@@ -17,13 +17,11 @@ public class AdminController {
     private final String REDIRECT_USERS = "redirect:users";
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("")

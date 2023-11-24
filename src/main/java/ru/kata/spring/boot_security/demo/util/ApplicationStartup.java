@@ -32,10 +32,10 @@ public class ApplicationStartup {
 
         User admin = new User("admin", "admin");
         admin.getRoles().add(roleAdmin);
-        userService.save(admin);
+        userService.saveOrUpdate(admin);
 
         User user = new User("user", "user");
         user.getRoles().add(roleUser);
-        userService.save(user);
+        userService.saveOrUpdate(user);
     }
 }
