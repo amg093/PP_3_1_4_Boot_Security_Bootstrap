@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -23,19 +22,18 @@ public class ApplicationStartup {
     }
 
     @PostConstruct
-    @Transactional
     public void onApplicationStartup() {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");
         roleService.save(roleAdmin);
         roleService.save(roleUser);
 
-        User admin = new User("admin", "admin");
+        User admin = new User("admin", "admin", "firstname", "lastname", "admin@mail.ru");
         admin.getRoles().add(roleAdmin);
-        userService.saveOrUpdate(admin);
+        userService.save(admin);
 
-        User user = new User("user", "user");
+        User user = new User("user", "user", "user", "user", "user@mail.ru");
         user.getRoles().add(roleUser);
-        userService.saveOrUpdate(user);
+        userService.save(user);
     }
 }

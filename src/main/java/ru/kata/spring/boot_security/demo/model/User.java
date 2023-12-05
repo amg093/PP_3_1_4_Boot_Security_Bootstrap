@@ -18,15 +18,11 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
     private String password;
-
     private String firstName;
     private String lastName;
-
     private String email;
-
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -43,9 +39,12 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public User(String username, String password, String firstName, String lastName, String email, Set<Role> roles) {
@@ -109,9 +108,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new Role(role.getAuthority()))
-                .collect(Collectors.toList());
+        return roles;
     }
 
     @Override

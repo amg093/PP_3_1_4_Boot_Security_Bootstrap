@@ -29,44 +29,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(long id) {
-        return userRepository.getById(id);
-    }
-
-    @Override
-    public User getUser(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
     @Transactional
-    public void saveOrUpdate(User user) {
+    public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     @Override
     @Transactional
-    public void delete(long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
+    public User showUserById(Long id) {
+        return userRepository.getById(id);
+    }
+
+    @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username); //ищем юзера в базе данных
+    public void update(Long id, User user) {
+        user.setId(id);
+        userRepository.save(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email); //ищем юзера в базе данных
 
         //если юзера нету в бд
         if (user == null) {
             throw new UsernameNotFoundException(
-                    String.format("User %s not found", username)
+                    String.format("User %s not found", email)
             );
         }
 
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                user.getAuthorities()
-        );
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getAuthorities());
     }
 }
