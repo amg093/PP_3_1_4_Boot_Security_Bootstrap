@@ -179,7 +179,7 @@
                                             <!-- Наполнение кнопки Delete, описание модального окна -->
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <form id="formDelete" th:method="DELETE"
+                                                    <form id="formDelete" th:method="POST"
                                                           th:action="@{admin/delete/{id} (id=${user.id})}"
                                                           th:object="${user}">
                                                         <div class="modal-header"> <!-- Шапка модального окна -->
@@ -285,7 +285,6 @@
                                                        id="userUsernameNew"
                                                        placeholder="Username">
                                                 <br>
-                                                </label>
                                                 <label for="userEmailNew">Email</label>
                                                 <input th:name="email" th:type="text"
                                                        class="form-control"

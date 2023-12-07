@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,12 +40,12 @@ public class AdminController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user, @RequestParam("roles") Long[] rolesId) {
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.update(id, user);
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
